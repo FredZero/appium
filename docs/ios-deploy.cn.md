@@ -22,30 +22,30 @@ CODE_SIGN_IDENTITY (Code Signing Identity)
     例如: iPhone Developer
 ```
 
-PROVISIONING_PROFILE is missing from the index of available commands, but may be necessary.
+PROVISIONING_PROFILE 已经从可用的的命令中消失了，但还是有必要设置的。
 
-Specify "CODE_SIGN_IDENTITY" & "PROVISIONING_PROFILE" settings in the xcodebuild command:
+在xcodebuild命令中设置 "CODE_SIGN_IDENTITY" & "PROVISIONING_PROFILE":
 
 ```
 xcodebuild -sdk <iphoneos> -target <target_name> -configuration <Debug> CODE_SIGN_IDENTITY="iPhone Developer: Mister Smith" PROVISIONING_PROFILE="XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX"
 ```
-On success, the app will be built to your ```<app_dir>/build/<configuration>-iphoneos/<app_name>.app```
+成功的话, app会构建到如下目录 ```<app_dir>/build/<configuration>-iphoneos/<app_name>.app```
 
-## Deploy using Fruitstrap
-Go clone a forked version of fruitstrap as the [ghughes version](https://github.com/ghughes/fruitstrap) is no longer maintained. Success has been confirmed with the [unprompted fork](https://github.com/unprompted/fruitstrap), but others are reportedly functional.
+## 用Fruitstrap进行部署
+clone一个fruitstrap的fork版本在[ghughes version](https://github.com/ghughes/fruitstrap) ，这个已经不再维护. 已确认该fork可用[unprompted fork](https://github.com/unprompted/fruitstrap), 但是其它的据说也可用.
 
-Once cloned, run ``make fruitstrap``
-Now, copy the resulting ``fruitstrap`` executable to your app's project or a parent directory.
+clone成功的话, 执行 ``make fruitstrap``
+然后, 然后复制生成的 ``fruitstrap``到app的所在的目录或上级目录下。
 
-Execute fruitstrap after a clean build by running (commands available depend on your fork of fruitstrap):
+运行fruitstrap 通过输入以下命令 (命令是否可用依赖于你fork的 fruitstrap):
 ```
 ./fruitstrap -d -b <PATH_TO_APP> -i <Device_UDID>
 ```
-If you are aiming to use continuous integration in this setup, you may find it useful to want to log the output of fruitstrap to both command line and log, like so:
+如果是为了持续集成,你可以发现很有用的方法来记录fruitstrap命令行和日志文件中的记录, 像这样:
 ```
 ./fruitstrap -d -b <PATH_TO_APP> -i <Device_UDID> 2>&1 | tee fruit.out
 ```
-Since fruitstrap will need to be killed before the node server can be launched, an option is to scan the output of the fruitstrap launch for some telling sign that the app has completed launching. This may prove useful if you are doing this via a Rakefile and a ``go_device.sh`` script:
+在node服务启动前fruitstrap进行需要被结束, 一个方法是扫描fruitstrap的输出来得知app完成启动。 有一个有效的方法是通过一个Rakefile 和一个 ``go_device.sh`` 脚本:
 ```
 bundle exec rake ci:fruit_deploy_app | while read line ; do 
    echo "$line" | grep "text to identify successful launch" 
@@ -58,7 +58,7 @@ bundle exec rake ci:fruit_deploy_app | while read line ; do
    fi
  done
 ```
-Once fruitstrap is killed, node server can be launched and Appium tests can run!
+一旦fruitstrap的进程被结束, node 服务就可以启动并且appium测试可以被执行!
 
-Next:
-[Running Appium on Real Devices](https://github.com/appium/appium/wiki/Running-Appium-on-Real-Devices)
+下一步:
+[在真机上运行appium](https://github.com/appium/appium/wiki/Running-Appium-on-Real-Devices)
