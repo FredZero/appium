@@ -1,12 +1,12 @@
-Deploying your iOS app to your device
+部署ios app 到手机上
 =====================================
-To prepare for your Appium tests to run on a real device, you will need to:
+准备在真机上执行appium测试, 需要如下准备:
 
-1. Build your app with specific device-targeted parameters
-1. Use [fruitstrap](https://github.com/ghughes/fruitstrap), a 3rd-party tool, to deploy this build to your device
+1. 用特殊的设备参数来构建app
+1. 使用 [fruitstrap](https://github.com/ghughes/fruitstrap), 一个第三方程序，来部署你构建的app到手机上
 
-## Xcodebuild with parameters:
-A newer xcodebuild now allows settings to be specified. Taken from [developer.apple.com](https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html):
+## Xcodebuild 命令的参数:
+新的参数运行指定设置. 参考 [developer.apple.com](https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html):
 
 ```
 xcodebuild [-project projectname] [-target targetname ...]
@@ -14,12 +14,12 @@ xcodebuild [-project projectname] [-target targetname ...]
              [buildaction ...] [setting=value ...] [-userdefault=value ...]
 ```
 
-This is a resource to explore the available [settings](https://developer.apple.com/library/mac/#documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html#//apple_ref/doc/uid/TP40003931-CH3-DontLinkElementID_10)
+这有一个资料来参考可用的[设置](https://developer.apple.com/library/mac/#documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html#//apple_ref/doc/uid/TP40003931-CH3-DontLinkElementID_10)
 
 ```
 CODE_SIGN_IDENTITY (Code Signing Identity)
-    Description: Identifier. Specifies the name of a code signing identity.
-    Example value: iPhone Developer
+    介绍: 标识符，指定一个签名.
+    例如: iPhone Developer
 ```
 
 PROVISIONING_PROFILE is missing from the index of available commands, but may be necessary.
